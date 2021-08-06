@@ -12,6 +12,7 @@
 		5037723F26BD3F8600EECED7 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037723E26BD3F8600EECED7 /* RecordView.swift */; };
 		5037724126BD3FFD00EECED7 /* RecordingsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037724026BD3FFD00EECED7 /* RecordingsList.swift */; };
 		5037724426BD459300EECED7 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037724326BD459300EECED7 /* Recording.swift */; };
+		5037724626BD486500EECED7 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5037724526BD486500EECED7 /* AudioPlayer.swift */; };
 		50A52DFD26BD06C000FD742F /* IosRecordDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A52DFC26BD06C000FD742F /* IosRecordDemoApp.swift */; };
 		50A52DFF26BD06C000FD742F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A52DFE26BD06C000FD742F /* ContentView.swift */; };
 		50A52E0126BD06C100FD742F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50A52E0026BD06C100FD742F /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 		5037723E26BD3F8600EECED7 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		5037724026BD3FFD00EECED7 /* RecordingsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingsList.swift; sourceTree = "<group>"; };
 		5037724326BD459300EECED7 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
+		5037724526BD486500EECED7 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		50A52DF926BD06C000FD742F /* IosRecordDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IosRecordDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50A52DFC26BD06C000FD742F /* IosRecordDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosRecordDemoApp.swift; sourceTree = "<group>"; };
 		50A52DFE26BD06C000FD742F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				5037723E26BD3F8600EECED7 /* RecordView.swift */,
 				5037724026BD3FFD00EECED7 /* RecordingsList.swift */,
+				5037724526BD486500EECED7 /* AudioPlayer.swift */,
 			);
 			path = screen;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				50A52DFF26BD06C000FD742F /* ContentView.swift in Sources */,
 				50A52DFD26BD06C000FD742F /* IosRecordDemoApp.swift in Sources */,
 				5037723D26BD3EFE00EECED7 /* AudioRecorder.swift in Sources */,
+				5037724626BD486500EECED7 /* AudioPlayer.swift in Sources */,
 				5037724126BD3FFD00EECED7 /* RecordingsList.swift in Sources */,
 				5037723F26BD3F8600EECED7 /* RecordView.swift in Sources */,
 				5037724426BD459300EECED7 /* Recording.swift in Sources */,
