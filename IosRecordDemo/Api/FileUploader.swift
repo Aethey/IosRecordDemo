@@ -9,10 +9,15 @@ import Foundation
 import Combine
 
 class FileUploader: NSObject {
+    
+    static let shared = FileUploader()
+    
     typealias Percentage = Double
     typealias Publisher = AnyPublisher<Percentage, Error>
+    typealias PublisherPost = AnyPublisher<String, Error>
     
     private typealias Subject = CurrentValueSubject<Percentage, Error>
+    private typealias SubjectPost = CurrentValueSubject<String, Error>
 
     private lazy var urlSession = URLSession(
         configuration: .default,
@@ -21,6 +26,12 @@ class FileUploader: NSObject {
     )
 
     private var subjectsByTaskID = [Int : Subject]()
+    private var subjectsPostByTaskID = [Int : SubjectPost]()
+    
+  
+    
+    @Published var respones: String = ""
+    var mCancellable: AnyCancellable?
     
     func doTest() {
         
@@ -33,6 +44,38 @@ class FileUploader: NSObject {
                 print(percentage)
             }
         )
+    }
+    
+    func postRequest() -> PublisherPost {
+        let url = URL(string: Config.baseUrl)!
+        var request = URLRequest(url: url)
+        
+        let subject = SubjectPost("????")
+        var removeSubject: (() -> Void)?
+        
+        request.httpMethod = "POST"      // Postリクエストを送る(このコードがないとGetリクエストになる)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data else { return }
+            do {
+//                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                
+                subject.send(json as! String)
+
+                print(json)
+            } catch let error {
+                subject.send(completion: .finished)
+                removeSubject?()
+                print(error)
+            }
+        }
+        
+        subjectsPostByTaskID[task.taskIdentifier] = subject
+        removeSubject = { [weak self] in
+            self?.subjectsByTaskID.removeValue(forKey: task.taskIdentifier)
+        }
+        task.resume()
+        return subject.eraseToAnyPublisher()
     }
 
     func uploadFile(at fileURL: URL,

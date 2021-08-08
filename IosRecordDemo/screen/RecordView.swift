@@ -25,13 +25,14 @@ struct RecordView: View {
                         print("Start recording)")
                     })
                 {
-                    Image(systemName: "circle.fill")
+                    Image(systemName: "play.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 100, height: 100)
                         .clipped()
-                        .foregroundColor(.red)
+                        .foregroundColor(.black)
                         .padding(.bottom, 40)
+
                 }
             } else {
                 Button(
@@ -46,7 +47,7 @@ struct RecordView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 100, height: 100)
                         .clipped()
-                        .foregroundColor(.red)
+                        .foregroundColor(.black)
                         .padding(.bottom, 40)
                 }
             }

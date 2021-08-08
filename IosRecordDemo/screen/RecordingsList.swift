@@ -15,7 +15,7 @@ struct RecordingsList: View {
         List {
             ForEach(audioRecorder.recordings, id: \.createdAt) { recording in
                 RecordingRow(audioURL: recording.fileURL)
-            }
+            }.buttonStyle(BorderlessButtonStyle())
         }
     }
 }
@@ -31,6 +31,10 @@ struct RecordingRow: View {
     var audioURL: URL
     
     @ObservedObject var audioPlayer = AudioPlayer()
+    @State var alertShouldBeShown = false
+    @State private var alertJson = ""
+    
+    @ObservedObject var model = TestApiManager()
     
     var body: some View {
         HStack {
@@ -42,6 +46,7 @@ struct RecordingRow: View {
                 }) {
                     Image(systemName: "play.circle")
                         .imageScale(.large)
+                        .foregroundColor(.black)
                 }
             } else {
                 Button(action: {
@@ -49,9 +54,35 @@ struct RecordingRow: View {
                 }) {
                     Image(systemName: "stop.fill")
                         .imageScale(.large)
+                        .foregroundColor(.black)
                 }
             }
+            Spacer()
+            Button(action: {
+                model.postRequest{ data in
+                    alertJson = data
+                    alertShouldBeShown = true
+                }
+                
+            })
+            {
+                Image(systemName: "arrow.up.square.fill")
+                    .imageScale(.large)
+                    .foregroundColor(.black)
+            }
+        }.alert(isPresented: $alertShouldBeShown, content: {
+            
+            Alert(title: Text("アップロード成功:"),
+                  message: Text(alertJson),
+                  dismissButton: Alert.Button.default(
+                    Text("OK"), action: {
+                        
+                        
+                    }
+                  )
+            )
         }
+        )
     }
     
 }
