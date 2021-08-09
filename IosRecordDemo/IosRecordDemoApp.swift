@@ -11,7 +11,7 @@ import SwiftUI
 struct IosRecordDemoApp: App {
     var body: some Scene {
         WindowGroup {
-            RecordView(audioRecorder: AudioRecorder.shared)
+            RecordView(audioRecorder: AudioRecorder.shared).environmentObject(RecordViewStore())
         }
     }
 }

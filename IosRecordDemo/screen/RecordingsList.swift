@@ -7,8 +7,9 @@
 
 import SwiftUI
 
+
 struct RecordingsList: View {
-    
+
     @ObservedObject var audioRecorder: AudioRecorder
     
     var body: some View {
@@ -21,18 +22,22 @@ struct RecordingsList: View {
 }
 
 struct RecordingsList_Previews: PreviewProvider {
+    
+    @State var mShowLoading: Bool
+    
     static var previews: some View {
         RecordingsList(audioRecorder: AudioRecorder())
     }
 }
 
 struct RecordingRow: View {
-    
+    @EnvironmentObject var recordViewStore: RecordViewStore
     var audioURL: URL
     
     @ObservedObject var audioPlayer = AudioPlayer()
     @State var alertShouldBeShown = false
     @State private var alertJson = ""
+//    @State private var isLoading = false
     
     @ObservedObject var model = TestApiManager()
     
@@ -59,9 +64,14 @@ struct RecordingRow: View {
             }
             Spacer()
             Button(action: {
+//                self.isLoading = true
+                self.recordViewStore.updateLoading()
                 model.postRequest{ data in
                     alertJson = data
+//                    self.isLoading = false
                     alertShouldBeShown = true
+                    self.recordViewStore.updateLoading()
+                
                 }
                 
             })
@@ -70,6 +80,10 @@ struct RecordingRow: View {
                     .imageScale(.large)
                     .foregroundColor(.black)
             }
+//            LoadingIndicatorView(isLoading: self.isLoading)
+//            if isLoading {
+//                ProgressView()
+//            }
         }.alert(isPresented: $alertShouldBeShown, content: {
             
             Alert(title: Text("アップロード成功:"),
